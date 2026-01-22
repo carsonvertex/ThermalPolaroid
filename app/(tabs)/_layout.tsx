@@ -5,7 +5,6 @@ import { View } from "react-native";
 
 import { HapticTab } from "@/components/haptic-tab";
 import { MainNav } from "@/components/shared";
-import CustomTabBar from "@/components/shared/custom-tab-bar";
 import { Colors } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useAuthStore } from "@/lib/stores/auth-store";
