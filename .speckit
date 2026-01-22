@@ -1,0 +1,29 @@
+# Spec Kit Configuration
+
+## Project Information
+project_name: React Native POS
+project_type: react-native
+language: typescript
+
+## Directories
+memory_dir: memory
+specs_dir: specs
+templates_dir: templates
+scripts_dir: scripts
+
+## AI Agent Configuration
+agent_instructions: CLAUDE.md
+constitution: memory/constitution.md
+
+## Feature Specification Structure
+spec_file: spec.md
+plan_file: plan.md
+tasks_file: tasks.md
+research_file: research.md
+
+## Templates
+spec_template: templates/spec-template.md
+plan_template: templates/plan-template.md
+tasks_template: templates/tasks-template.md
+research_template: templates/research-template.md
+

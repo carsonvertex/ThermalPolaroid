@@ -1,0 +1,8 @@
+# This file keeps the specs directory in git
+# Feature specifications will be created here following the pattern:
+# specs/001-feature-name/
+#   ├── spec.md
+#   ├── plan.md
+#   ├── tasks.md
+#   └── research.md
+
