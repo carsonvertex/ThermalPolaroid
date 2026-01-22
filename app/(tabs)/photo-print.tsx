@@ -37,7 +37,7 @@ try {
   console.log("Thermal printer library not available");
 }
 
-export default function AdminPhotoPrintScreen() {
+export default function  PhotoPrintScreen() {
   const theme = useTheme();
   const { language } = useLanguageStore();
   const { user } = useAuthStore();
@@ -57,11 +57,7 @@ export default function AdminPhotoPrintScreen() {
     deviceInfo.brand?.toLowerCase().includes("sunmi") ||
     deviceInfo.modelName?.toLowerCase().includes("sunmi");
 
-  // Redirect if not admin
-  if (!isAdmin) {
-    router.replace("/(tabs)/dashboard");
-    return null;
-  }
+ 
 
   const pickImage = async () => {
     try {

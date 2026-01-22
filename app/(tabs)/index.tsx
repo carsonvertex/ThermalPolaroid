@@ -1,16 +1,12 @@
 import TabsSwipeableContainer from '@/components/shared/tabs-swipeable-container';
-import { isSwipeableTab, useTabContext } from '@/lib/contexts/tab-context';
+import { isSwipeableTab, SwipeableTab, useTabContext } from '@/lib/contexts/tab-context';
 import { useSegments } from 'expo-router';
 import { useEffect } from 'react';
-import DashboardScreen from './dashboard';
-import OrderRecordScreen from './order-record';
-import SimpleOrderScreen from './simple-order';
+import PhotoPrintScreen from './photo-print';
 
 // Map tab names to indices
 const tabToIndex = {
-  dashboard: 0,
-  'simple-order': 1,
-  'order-record': 2,
+    'photo-print': 0,
 } as const;
 
 export default function TabsIndex() {
@@ -23,9 +19,9 @@ export default function TabsIndex() {
   useEffect(() => {
     // Always ensure we have a valid activeTab when on index route
     if (!isSwipeableTab(activeTab)) {
-      setActiveTab('dashboard');
+      setActiveTab('photo-print' as SwipeableTab);
     }
-  }, [activeTab, setActiveTab]); // Run whenever activeTab changes or on mount
+  }, [activeTab, setActiveTab]); 
 
   // Sync activeTab with current route when on a swipeable tab route
   useEffect(() => {
@@ -37,20 +33,19 @@ export default function TabsIndex() {
       // ensure we have a valid activeTab
       // This handles redirects from login where activeTab might not be set
       if (!isSwipeableTab(activeTab)) {
-        setActiveTab('dashboard');
+        setActiveTab('photo-print' as SwipeableTab);
       }
     }
   }, [segments, setActiveTab, activeTab]);
 
   // Ensure we always have a valid swipeable tab
-  const currentTab = isSwipeableTab(activeTab) ? activeTab : 'dashboard';
-  const activeIndex = tabToIndex[currentTab] ?? 0;
+  const currentTab = isSwipeableTab(activeTab) ? activeTab : 'photo-print' as SwipeableTab  ;
+  const activeIndex = tabToIndex[currentTab as keyof typeof tabToIndex] ?? 0;
 
   return (
     <TabsSwipeableContainer activeIndex={activeIndex}>
-      <DashboardScreen />
-      <SimpleOrderScreen />
-      <OrderRecordScreen />
+      <PhotoPrintScreen/>
+      <PhotoPrintScreen/>
     </TabsSwipeableContainer>
   );
 }

@@ -1,5 +1,4 @@
-import FloatingDevButton from '@/components/_devToolComponents/floating-dev-button';
-import UploadProgressBar from '@/components/shared/upload-progress-bar';
+
 import '@/global.css';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -129,8 +128,6 @@ export default function RootLayout() {
             <TabProvider>
               <ThemeProvider value={effectiveTheme === 'dark' ? DarkTheme : DefaultTheme}>
                 <RootLayoutNav />
-                <UploadProgressBar />
-                <FloatingDevButton />
                 <StatusBar style="auto" />
               </ThemeProvider>
             </TabProvider>

@@ -1,5 +1,4 @@
 import { useLanguageStore } from "@/lib/stores/language-store";
-import { useUploadProgressStore } from "@/lib/stores/upload-progress-store";
 import { MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -10,10 +9,7 @@ import { ThemedText } from "../ui";
 export default function UploadProgressBar() {
   const theme = useTheme();
   const { language } = useLanguageStore();
-  const { isUploading, progress, current, total, successCount, failCount } = useUploadProgressStore();
   const [isExpanded, setIsExpanded] = useState(false);
-
-  if (!isUploading) return null;
 
   return (
     <View
@@ -52,7 +48,7 @@ export default function UploadProgressBar() {
         />
         <View style={{ flex: 1 }}>
           <ProgressBar
-            progress={progress}
+            progress={0}
             color={theme.colors.primary}
             style={{ height: 4, borderRadius: 2 }}
           />
@@ -66,7 +62,7 @@ export default function UploadProgressBar() {
             marginRight: 4,
           }}
         >
-          {Math.round(progress * 100)}%
+          {Math.round(0 * 100)}%
         </ThemedText>
         <MaterialIcons
           name={isExpanded ? "expand-less" : "expand-more"}
@@ -102,7 +98,7 @@ export default function UploadProgressBar() {
                 opacity: 0.8,
               }}
             >
-              {current}/{total}
+              {0}/{0}
             </ThemedText>
           </View>
           <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
@@ -113,20 +109,9 @@ export default function UploadProgressBar() {
                 opacity: 0.8,
               }}
             >
-              ✓ {successCount} {language === "en" ? "Success" : "成功"} • ✗ {failCount} {language === "en" ? "Failed" : "失敗"}
+              ✓ {0} {language === "en" ? "Success" : "成功"} • ✗ {0} {language === "en" ? "Failed" : "失敗"}
             </ThemedText>
-            <TouchableOpacity onPress={() => router.push("/(tabs)/upload-sales-records")}>
-              <ThemedText
-                style={{
-                  fontSize: 11,
-                  color: theme.colors.primary,
-                  fontWeight: "600",
-                  textDecorationLine: "underline",
-                }}
-              >
-                {language === "en" ? "View Details →" : "查看詳情 →"}
-              </ThemedText>
-            </TouchableOpacity>
+          
           </View>
         </View>
       )}

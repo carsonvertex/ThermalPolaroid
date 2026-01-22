@@ -32,10 +32,7 @@ export function MainNav() {
     }
   };
 
-  // Don't show nav on login screen or if navigation isn't ready
-  if (segments[0] === "login" || !isNavigationReady) {
-    return null;
-  }
+ 
 
   return (
     <ThemedView

@@ -1,5 +1,4 @@
 // Avatar components temporarily replaced with simple View
-import { useOnlineStatus } from '@/lib/hooks/use-online-status';
 import { cn } from '@/lib/utils/cn';
 import { useRouter } from 'expo-router';
 import { Text, TouchableOpacity, View } from 'react-native';
@@ -26,7 +25,6 @@ export function Header({
   className,
 }: HeaderProps) {
   const router = useRouter();
-  const isOnline = useOnlineStatus();
 
   return (
     <View
@@ -63,11 +61,11 @@ export function Header({
             <View
               className={cn(
                 'h-2 w-2 rounded-full',
-                isOnline ? 'opacity-70' : 'opacity-40'
+                true ? 'opacity-70' : 'opacity-40'
               )}
             />
             <Text className="ml-1 text-xs opacity-60">
-              {isOnline ? 'Online' : 'Offline'}
+              {true ? 'Online' : 'Offline'}
             </Text>
           </View>
 

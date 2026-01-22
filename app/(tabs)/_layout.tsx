@@ -17,10 +17,7 @@ export default function TabLayout() {
   const { isAuthenticated } = useAuthStore();
   const { language } = useLanguageStore();
 
-  // Redirect to login if not authenticated
-  if (!isAuthenticated) {
-    return <Redirect href="/login" />;
-  }
+
 
   return (
     <View className="flex-1">
@@ -34,75 +31,11 @@ export default function TabLayout() {
         }}
       >
         <Tabs.Screen
-          name="index"
-          options={{
-            href: null, // Hide from tab bar
-          }}
-        />
-
-        <Tabs.Screen
-          name="dashboard"
-          options={{
-            href: null, // Hide from tab bar, accessible via swipeable container
-          }}
-        />
-
-        <Tabs.Screen
-          name="simple-order"
-          options={{
-            href: null, // Hide from tab bar, accessible via swipeable container
-          }}
-        />
-
-        <Tabs.Screen
-          name="order-record"
-          options={{
-            href: null, // Hide from tab bar, accessible via swipeable container
-          }}
-        />
-
-        <Tabs.Screen
-          name="product-master"
+          name="photo-print"
           options={{
            href: null,
           }}
         />
-        {/* Hidden tabs */}
-
-        <Tabs.Screen
-          name="accounts"
-          options={{
-           href: null,
-          }}
-        />
-
-        <Tabs.Screen
-          name="admin-photo-print"
-          options={{
-           href: null,
-          }}
-        />
-        <Tabs.Screen
-          name="admin-version-control"
-          options={{
-            href: null,
-          }}
-        />
-        <Tabs.Screen
-          name="devices"
-          options={{
-            href: null,
-          }}
-        />
-
-        <Tabs.Screen
-          name="today-sales"
-          options={{
-            title: language === "en" ? "Today Sales" : "今日銷售",
-            href: null,
-          }}
-        />
-
         <Tabs.Screen
           name="settings"
           options={{
@@ -110,21 +43,8 @@ export default function TabLayout() {
           }}
         />
 
-        <Tabs.Screen
-          name="upload-sales-records"
-          options={{
-            href: null,
-          }}
-        />
-
-        <Tabs.Screen
-          name="example"
-          options={{
-            href: null, // Hide from tab bar
-          }}
-        />
+       
       </Tabs>
-      <CustomTabBar />
     </View>
   );
 }

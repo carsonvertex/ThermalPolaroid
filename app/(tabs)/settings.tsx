@@ -9,11 +9,7 @@ import {
   View,
 } from "react-native";
 
-import { BackendConnectionCard } from "@/components/_loginComponents/BackendConnectionCard";
-import { DeviceInfoCard } from "@/components/_loginComponents/DeviceInfoCard";
-import { AppUpdateCard } from "@/components/_settingsComponents/AppUpdateCard";
 import { ThemedText, ThemedView } from "@/components/ui";
-import { resetDatabase } from "@/endpoints/sqlite";
 import { useAuthStore } from "@/lib/stores/auth-store";
 import { useLanguageStore } from "@/lib/stores/language-store";
 import { useUIStore } from "@/lib/stores/ui-store";
@@ -37,42 +33,7 @@ export default function SettingsScreen() {
   // Calculate tab bar height: paddingTop(8) + icon(28) + text margin(4) + text(~14) + padding(8) + safe area
   const TAB_BAR_HEIGHT = 8 + 28 + 4 + 14 + 8 + insets.bottom;
 
-  const handleReset = async () => {
-    Alert.alert(
-      language === "en" ? "Reset Database" : "重置資料庫",
-      language === "en"
-        ? "This will delete all local data. Continue?"
-        : "這將刪除所有本地數據。繼續嗎？",
-      [
-        { text: language === "en" ? "Cancel" : "取消", style: "cancel" },
-        {
-          text: language === "en" ? "Reset" : "重置",
-          style: "destructive",
-          onPress: async () => {
-            try {
-              setBusy(true);
-              await resetDatabase();
-
-              // Clear all React Query cache
-              queryClient.clear();
-
-              // Immediately log out and go to login screen
-              logout();
-              router.replace("/login");
-              Alert.alert(
-                "Done",
-                "Database has been reset. You have been signed out."
-              );
-            } catch (e) {
-              Alert.alert("Error", "Failed to reset the database");
-            } finally {
-              setBusy(false);
-            }
-          },
-        },
-      ]
-    );
-  };
+ 
 
   return (
     <KeyboardAvoidingView
@@ -282,80 +243,8 @@ export default function SettingsScreen() {
               </Card.Content>
             </Card>
 
-            {/* Database Settings - Admin Only */}
-            {isAdmin && (
-              <Card
-                style={{
-                  marginBottom: 16,
-                  backgroundColor: paperTheme.colors.surface,
-                }}
-                elevation={2}
-              >
-                <Card.Content style={{ padding: 16 }}>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      marginBottom: 16,
-                    }}
-                  >
-                    <View
-                      style={{
-                        backgroundColor: "#F44336",
-                        padding: 12,
-                        borderRadius: 12,
-                        marginRight: 16,
-                      }}
-                    >
-                      <MaterialIcons name="storage" size={24} color="#fff" />
-                    </View>
-                    <View style={{ flex: 1 }}>
-                      <ThemedText
-                        style={{
-                          fontSize: 16,
-                          fontWeight: "600",
-                          marginBottom: 4,
-                        }}
-                      >
-                        {language === "en" ? "Database" : "資料庫"}
-                      </ThemedText>
-                      <ThemedText style={{ fontSize: 12, opacity: 0.7 }}>
-                        {language === "en"
-                          ? "Manage your local data (Admin Only)"
-                          : "管理您的本地數據（僅限管理員）"}
-                      </ThemedText>
-                    </View>
-                  </View>
+          
 
-                  <TouchableOpacity
-                    style={{
-                      backgroundColor: "#F44336",
-                      borderRadius: 8,
-                      paddingVertical: 12,
-                      paddingHorizontal: 16,
-                      opacity: busy ? 0.5 : 1,
-                    }}
-                    disabled={busy}
-                    onPress={handleReset}
-                  >
-                    <ThemedText
-                      style={{
-                        color: "#fff",
-                        textAlign: "center",
-                        fontWeight: "600",
-                        fontSize: 14,
-                      }}
-                    >
-                      {language === "en" ? "Reset Database" : "重置資料庫"}
-                    </ThemedText>
-                  </TouchableOpacity>
-                </Card.Content>
-              </Card>
-            )}
-
-            <AppUpdateCard language={language} />
-            <BackendConnectionCard language={language} />
-            <DeviceInfoCard language={language} />
           </View>
         </ScrollView>
       </ThemedView>
